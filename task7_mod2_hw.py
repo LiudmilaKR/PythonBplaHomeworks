@@ -31,12 +31,12 @@ class SQLiteFactory(BDFactory):
 
 class MySQLFactory(BDFactory):
     def connect(self):
-        return mysql.connector.connect(host='127.0.0.1', user='newuser', passwd='***', database='bpla')
-        # return MySQLdb.connect('127.0.0.1', 'newuser', '***', 'bpla')
+        return mysql.connector.connect(host='127.0.0.1', user='newuser', passwd='', database='bpla')
+        # return MySQLdb.connect('127.0.0.1', 'newuser', '', 'bpla')
 
 class PostgresSQLFactory(BDFactory):
     def connect(self):
-        return psycopg2.connect(database='postgres', user='postgres', password='***', host='localhost')
+        return psycopg2.connect(database='postgres', user='postgres', password='', host='localhost')
 
 
 class QueryBuilder():
