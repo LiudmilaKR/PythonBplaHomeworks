@@ -26,6 +26,28 @@ class MySingleton:
     def get_instance(cls):
         return cls.__instance
 
+# Решение преподавателя
+class MySingleton1:
+    __instance = None
+
+    def __init__(self):
+        if MySingleton1.__instance is not None:
+            print('Ветка init: MySingleton1 is not None')
+            raise Exception('Этот класс является синглтоном!')
+        else:
+            print('Ветка init: MySingleton1.__instance = self')
+            MySingleton1.__instance = self
+
+    @staticmethod
+    def get_instance():
+        if MySingleton1.__instance is None:
+            print('Создаем экземпляр синглетона')
+            MySingleton1()
+        return MySingleton1.__instance
+    
+    # def __repr__(self) -> str:
+    #     return str(self.__instance)
+    
 
 class MyClass:
     def test(self):
@@ -61,6 +83,15 @@ if __name__ == '__main__':
     singleton2 = MySingleton('singleton2')
     print(singleton2.get_instance())
     print(MySingleton.get_instance())
+    print('================================')
+    print()
+    
+    # Проверка Singleton1
+    print('Задание по Singleton1')
+    singleton3 = MySingleton1()
+    print(f'singleton3 = {singleton3.__repr__()}')
+    singleton1 = MySingleton1.get_instance()
+    singleton2 = MySingleton1.get_instance()
     print('================================')
     print()
 
