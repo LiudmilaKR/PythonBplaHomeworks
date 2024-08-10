@@ -43,7 +43,7 @@ missions = {}
 @app.route('/drones', methods=['POST'])
 def create_drone():
     """Создание нового БПЛА"""
-    drone_id = request.json.get('drone_id')
+    drone_id = str(request.json.get('drone_id'))
     if drone_id:
         drones[drone_id] = request.json
         return jsonify({'message': f'Дрон id={drone_id} добавлен'}), 201
@@ -52,7 +52,7 @@ def create_drone():
 @app.route('/missions', methods=['POST'])
 def create_mission():
     """Создание новой миссии"""
-    mission_id = request.json.get('mission_id')
+    mission_id = str(request.json.get('mission_id'))
     if mission_id:
         missions[mission_id] = request.json
         return jsonify({'message': f'Миссия id={mission_id} добавлена'}), 201
@@ -71,7 +71,7 @@ def get_all_missions():
 @app.route('/drones/<drone_id>', methods=['GET'])
 def get_drone_by_id(drone_id):
     """Получение информации о конкретном БПЛА"""
-    drone = drones.get(str(drone_id))
+    drone = drones.get(drone_id)
     if drone:
         return jsonify(drone), 200
     return jsonify({'error': f'Дрон id={drone_id} не найден'}), 404
@@ -79,7 +79,7 @@ def get_drone_by_id(drone_id):
 @app.route('/drones/<drone_id>', methods=['PUT'])
 def update_drone(drone_id):
     """Обновление информации о БПЛА"""
-    drone = drones.get(str(drone_id))
+    drone = drones.get(drone_id)
     if drone:
         drones[drone_id] = request.json
         return jsonify({'message': f'Дрон id={drone_id} обновлен'}), 201
@@ -97,7 +97,7 @@ def update_mission(mission_id):
 @app.route('/drones/<drone_id>', methods=['DELETE'])
 def delete_drone(drone_id):
     """Удаление БПЛА"""
-    drone = drones.get(str(drone_id))
+    drone = drones.get(drone_id)
     if drone:
         del drones[drone_id]
         return jsonify({'message': f'Дрон id={drone_id} удален'}), 200
